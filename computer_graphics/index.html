@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>WebGL Assignment</title>
+    <link rel="stylesheet" href="/webgl_assignment" type="text/css">
+</head>
+
+<body>
+
+    <div class="left_panel">
+        <svg onclick="start_line()" viewBox="0 0 100 100" version="1.1">
+            <line x1="10" y1="10" x2="90" y2="90" stroke="white" stroke-width="10" />
+        </svg>
+        <svg viewBox="0 0 100 100" onclick="start_circle()" version="1.1">
+            <circle cx="50%" cy="50%" r="40" fill="white" stroke-width="3" />
+        </svg>
+        <svg onclick="start_rectangle()" viewBox="0 0 100 100" version="1.1">
+            <rect width="100%" height="80%" fill="white" style="stroke-width:3;margin-top:5px;" />
+        </svg>
+        <svg onclick="start_rectangle()" viewBox="0 0 100 100" version="1.1">
+            <rect width="100%" height="100%" fill="white" style="stroke-width:3;" />
+        </svg> <svg onclick="start_triangle()" viewBox="0 0 100 100">
+            <polygon points="50,100 0,0 100,0" fill="white" style="stroke-width:1;" />
+        </svg>
+
+    </div>
+    <div class="main_panel">
+        <marquee>---PAINT PROGRAM-- DRAW LINE, CIRCLE, POLYGONS.....</marquee>
+
+        <canvas id="glcanvas" width="640" height="200"></canvas>
+
+    </div>
+    <div class="bottom_panel">
+
+        <div class="card" id="line">
+            <p> -- DRAW LINE -- -- Use a mouse to input coordinates. Values must be between -1.0 and 1.0 for x,y
+                coordinates respectively </p>
+            <div class="container">
+                <div>
+
+                    <input style="margin-top: 5px;" id="colorpickerline" name="Color Picker" type="color"></input>
+                </div>
+                <div style="margin-top: 5px;margin-left: 4px;">
+                    (1.) x -- <input id="top_left_xline" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" />
+                    y
+                    --
+                    <input id="top_left_yline" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+                    <br>
+                    (2.)
+                    x -- <input id="bottom_left_xline" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" />
+                    y
+                    --
+                    <input id="bottom_left_yline" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+
+                </div>
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="draw_a_line()"> Generate
+                        diagram</button></div>
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="end()"> Close </button></div>
+            </div>
+        </div>
+
+        <div class="card" id="circle">
+            <p> -- DRAW CIRCLE -- </p>
+            <div class="container">
+                <div>
+                    <input style="margin-top: 5px;" id="colorpickercircle" name="Color Picker" type="color"></input>
+                </div>
+                <div style="margin-top: 5px; margin-left: 4px;">
+                    ( Center )
+                    x -- <input id="bottom_left_xcircle" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" /> y
+                    --
+                    <input id="bottom_left_ycircle" type="number" style="width: 40px;" min="-1.0" max="1.0"
+                        step="0.1" />
+                    ( Diameter )
+                    <input id="radius" type="number" style="width: 40px;" min="0" max="1.0" step="0.1" />
+
+
+                </div>
+                <div style="margin-top: 5px;margin-left: 4px;"><button onclick="draw_circle()"> Generate
+                        diagram</button></div>
+                <div style="margin-top: 5px;margin-left: 4px;"><button onclick="end()"> Close </button></div>
+            </div>
+        </div>
+
+
+
+        <div class="card" id="triangle">
+            <p> -- DRAW TRIANGLE -- Input attributes. Values must be between -1.0 and 1.0 for x,y
+                coordinates respectively </p>
+            <div class="container">
+
+                <div>
+
+                    <input style="margin-top: 5px;" id="colorpickertriangle" name="Color Picker" type="color"></input>
+                </div>
+                <div style="margin-top: 5px; margin-left: 4px;">
+                    (1.) x -- <input id="top_left_xt" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" />
+                    y
+                    --
+                    <input id="top_left_yt" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+                    (2.)
+                    x -- <input id="bottom_left_xt" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" /> y
+                    --
+                    <input id="bottom_left_yt" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+                    (3.) x -- <input id="bottom_right_xt" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" />
+                    y
+                    -- <input id="bottom_right_yt" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+
+                </div>
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="draw_triangle()"> Generate
+                        diagram</button></div>
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="end()"> Close </button></div>
+            </div>
+
+        </div>
+
+
+        <div class="card rect" draggable="true" id="rectangle">
+
+            <p> -- DRAW RECTANGLE OR SQUARE OR 4 sided polygon-- Input coordinates. Values must be between -1.0 and 1.0
+                for x,y
+                coordinates respectively </p>
+            <div class="container">
+                <div>
+
+                    <input style="margin-top: 5px;" id="colorpickers" name="Color Picker" type="color"></input>
+                </div>
+                <div style="margin-top: 5px; margin-left: 4px;">
+                    (1.) x -- <input id="top_left_x" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" /> y
+                    --
+                    <input id="top_left_y" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" /> (2.) x
+                    --
+                    <input id="top_right_x" style="width: 40px;" min="-1.0" max="1.0" step="0.1" type="number" /> y --
+                    <input id="top_right_y" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" /> <br>
+                    (3.) x -- <input id="bottom_left_x" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" />
+                    y
+                    -- <input id="bottom_left_y" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+                    (4.)
+                    x -- <input id="bottom_right_x" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" /> y
+                    --
+                    <input id="bottom_right_y" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+
+                </div>
+
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="draw_rectangle()"> Generate
+                        diagram</button></div>
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="end()"> Close </button></div>
+            </div>
+        </div>
+
+        <div class="card rect" draggable="true" id="shape">
+
+            <p> -- DRAW SHAPE -- Input coordinates. Values must be between -1.0 and 1.0 for x,y
+                coordinates respectively </p>
+            <div class="container">
+                <div>
+
+                    <input style="margin-top: 5px;" id="colorpickershape" name="Color Picker" type="color"></input>
+                </div>
+                <div style="margin-top: 5px; margin-left: 4px;">
+                    (1.) x -- <input id="top_left_xs" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" /> y
+                    --
+                    <input id="top_left_ys" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" /> (2.) x
+                    --
+                    <input id="top_right_xs" style="width: 40px;" min="-1.0" max="1.0" step="0.1" type="number" /> y --
+                    <input id="top_right_ys" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" /> <br>
+                    (3.) x -- <input id="bottom_left_xs" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" />
+                    y
+                    -- <input id="bottom_left_ys" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+                    (4.)
+                    x -- <input id="bottom_right_xs" style="width: 40px;" min="-1.0" max="1.0" step="0.1"
+                        type="number" /> y
+                    --
+                    <input id="bottom_right_ys" type="number" style="width: 40px;" min="-1.0" max="1.0" step="0.1" />
+
+                </div>
+
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="draw_shape()"> Generate
+                        diagram</button></div>
+                <div style="margin-top: 5px; margin-left: 4px;"><button onclick="end()"> Close </button></div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+<script src="/gl-matrix"></script>
+<script src="/draw_diagram"></script>
+<script src="/manage_page"></script>
+<script src="/draw_shape"></script>
+<script src="/draw_line"></script>
+<script src="/draw_triangle"></script>
+<script src="/draw_circle"></script>
+
+</html>

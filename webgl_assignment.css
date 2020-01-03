@@ -1,0 +1,84 @@
+body {
+    height: 400px;
+    width: 100%;
+    background-color: antiquewhite;
+
+
+    padding-top: 20px;
+}
+
+.left_panel {
+    margin-left: 10%;
+    float: left;
+    height: 500px;
+    width: 5%;
+    background-color: burlywood;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+
+}
+
+.main_panel {
+    /*padding-left: 2%;
+    padding-right: 2%; */
+    margin-right: 10%;
+    float: right;
+    height: 350px;
+    width: 75%;
+    background-color: aliceblue;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.bottom_panel {
+    float: right;
+    height: 150px;
+    margin-right: 10%;
+    width: 75%;
+    background-color: burlywood;
+}
+
+canvas {
+    margin-top: 25px;
+    margin-top: 10px !important;
+    margin-bottom: 25px;
+    margin-left: 2%;
+    margin-right: 2%;
+    height: 300px !important;
+    width: 96% !important;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    display: none;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+    padding: 2px 16px;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(241, 238, 238, 0.959);
+    transition: 0.3s;
+}
+
+svg {
+    width: 80%;
+    height: 40px;
+    margin-left: 2%;
+    margin-right: 2%;
+    color: white;
+}
+
+/*.rect {
+    position: fixed;
+    top: 150px;
+    bottom: 150px;
+    background: white;
+}*/
