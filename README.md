@@ -17,7 +17,7 @@
 <ol>
 
 
-<p> Feel free to fork this project and run it in your local machine </p>
+<p> Feel free to run this project in your local machine </p>
 
 
 </body>
